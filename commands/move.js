@@ -1,4 +1,4 @@
-const funcall = require("../modules/funcall.js");
+  const funcall = require("../modules/funcall.js");
 //command usage: >move [direction / room]
 const strifecall = require("../modules/strifecall.js");
 const landcall = require("../modules/landcall.js");
@@ -54,6 +54,13 @@ exports.run = (client, message, args) => {
     return;
   }
 
+  async function dexCheck(){
+
+    const attachment = await client.imgcall.sdexCheck(client,message,0,args,3,area[2][value][5],area[2][value][5].length,area[2][value][2]);
+
+      message.channel.send(attachment);
+  }
+
   if(args[0]=="north" || args[0]=="n" || args[0]=="south" || args[0]=="s" || args[0]=="east" || args[0]=="e" || args[0]=="west" || args[0]=="w") {
 
     //move between areas on land, cannot be done from house
@@ -101,7 +108,6 @@ exports.run = (client, message, args) => {
       client.landMap.set(land,sec,local[0]);
 
       msg+=`You move North and find a ${typeList[sec[local[1]][local[2]][0]]}`;
-
       break;
 
       case "south":
@@ -235,6 +241,7 @@ exports.run = (client, message, args) => {
       }
     }
     message.channel.send(msg);
+    
     landcall.drawMap(client,message,true);
 
   } else {
@@ -278,6 +285,9 @@ exports.run = (client, message, args) => {
     client.playerMap.set(charid,local,"local");
     client.landMap.set(land,sec,local[0]);
 
+    //MDOMODMDOMDOMDOMDO
+    dexCheck();
+    return;
 
   }
 
