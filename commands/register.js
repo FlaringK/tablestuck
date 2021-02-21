@@ -309,10 +309,36 @@ var land = {
 
 //adds the charaacter sheet and land sheet to the database
 
+          if(!args[0]){
+            message.channel.send("Name is empty! Using defualt name, you can change this with >name");
+            output = client.playerMap.get(charid,"name")
+          }
+
+          var i=0;
+          var output ="";
+          while(args[i]){
+            if(args[i].includes("@")){
+              args[i]=args[i].slice(args[i].indexOf("@")+1);
+            }
+            output = output + args[i]+" ";
+            i++
+          }
+          output = output.slice(0,-1);
+
+          if(output.length>32){
+            message.channel.send("Name is too long! Using defualt name, you can change this with >name");
+            output = client.playerMap.get(charid,"name")
+          }
+
+          if(output == ""){
+              output = client.playerMap.get(charid,"name")
+          }
+
+          client.playerMap.set(charid,output,"name");
 
 client.landMap.set(charid,land)
 
 message.channel.send(`${target} has been registered!`);
-message.channel.send(`${message.author.username} stands in their bedroom. It just so happens that today, the 25th of July is the day of SAHCON! \n\nThank you for playing Tablestuck! For this game, you have been given completely randomized items throughout your house. If you are ever confused about how the bot functions or any of the commnands, use the >help command!\nIf at any point you die during this test, just use >register again to come back to life! This will reset your character, house and land entirely so only do this if you die or get softlocked!\n\nIf you're ever confused, feel free to use >help`);
+message.channel.send(`${output} stands in their bedroom. It just so happens that today, the ||__|| of ||________|| is a very special day! \n\nThank you for playing Tablestuck! For this game, you have been given completely randomized items throughout your house. If you are ever confused about how the bot functions or any of the commnands, use the >help command!\nIf at any point you die during this test, just use >register again to come back to life! This will reset your character, house and land entirely so only do this if you die or get softlocked!\n\nIf you're ever confused, feel free to use >help`);
 
 }
